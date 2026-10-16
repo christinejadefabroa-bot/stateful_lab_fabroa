@@ -113,6 +113,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   // Removes all items marked as got it.
+
   void _clearChecked() {
     final checkedCount = _items.where((item) => item.gotIt).length;
 
@@ -126,6 +127,16 @@ class _CartScreenState extends State<CartScreen> {
     setState(() {
       _items.removeWhere((item) => item.gotIt);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '$checkedCount checked item${checkedCount == 1 ? '' : 's'} removed successfully!',
+        ),
+        backgroundColor: Colors.teal,
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
